@@ -1,5 +1,12 @@
 import React, { ReactNode } from "react";
-import { TouchableOpacity, View, ActivityIndicator, Image } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+  Image,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
 import styles from "./MediaControls.style";
 import { getPlayerStateIcon } from "./utils";
 import { Props } from "./MediaControls";
@@ -11,6 +18,7 @@ type ControlsProps = Pick<
 > & {
   onPause: () => void;
   renderPlayIcon?: () => ReactNode;
+  playIconContainerStyle?: StyleProp<ViewStyle>;
 };
 
 const Controls = (props: ControlsProps) => {
@@ -21,6 +29,7 @@ const Controls = (props: ControlsProps) => {
     onReplay,
     onPause,
     renderPlayIcon,
+    playIconContainerStyle,
   } = props;
   const icon = getPlayerStateIcon(playerState);
   const pressAction = playerState === PLAYER_STATES.ENDED ? onReplay : onPause;
@@ -29,7 +38,11 @@ const Controls = (props: ControlsProps) => {
     <ActivityIndicator size="large" color="#FFF" />
   ) : (
     <TouchableOpacity
-      style={[styles.playButton, { backgroundColor: mainColor }]}
+      style={[
+        styles.playButton,
+        { backgroundColor: mainColor },
+        playIconContainerStyle,
+      ]}
       onPress={pressAction}
       accessibilityLabel={PLAYER_STATES.PAUSED ? "Tap to Play" : "Tap to Pause"}
       accessibilityHint={"Plays and Pauses the Video"}
