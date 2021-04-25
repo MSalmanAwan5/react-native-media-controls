@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { TouchableOpacity, View, Text, Image, ViewStyle } from "react-native";
 import RNSlider from "react-native-slider";
 import styles from "./MediaControls.style";
@@ -24,6 +24,7 @@ type Props = Pick<
 > & {
   onPause: () => void;
   customSliderStyle?: CustomSliderStyle;
+  renderFullScreenIcon?: () => ReactNode;
 };
 
 const fullScreenImage = require("./assets/ic_fullscreen.png");
@@ -36,6 +37,7 @@ const Slider = (props: Props) => {
     onFullScreen,
     onPause,
     progress,
+    renderFullScreenIcon,
   } = props;
 
   const containerStyle = customSliderStyle?.containerStyle || {};
@@ -91,7 +93,11 @@ const Slider = (props: Props) => {
           style={styles.fullScreenContainer}
           onPress={onFullScreen}
         >
-          <Image source={fullScreenImage} />
+          {renderFullScreenIcon ? (
+            renderFullScreenIcon()
+          ) : (
+            <Image source={fullScreenImage} />
+          )}
         </TouchableOpacity>
       )}
     </View>
