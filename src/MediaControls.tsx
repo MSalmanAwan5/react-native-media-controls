@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   GestureResponderEvent,
   ViewStyle,
+  StyleProp,
 } from "react-native";
 import styles from "./MediaControls.style";
 import { PLAYER_STATES } from "./constants/playerStates";
@@ -32,6 +33,7 @@ export type Props = {
   toolbarStyle?: ViewStyle;
   renderPlayIcon?: () => ReactNode;
   renderFullScreenIcon?: () => ReactNode;
+  playIconContainerStyle?: StyleProp<ViewStyle>;
 };
 
 const MediaControls = (props: Props) => {
@@ -52,6 +54,7 @@ const MediaControls = (props: Props) => {
     sliderStyle, // defaults are applied in Slider.tsx
     toolbarStyle: customToolbarStyle = {},
     renderPlayIcon,
+    playIconContainerStyle,
     renderFullScreenIcon,
   } = props;
   const { initialOpacity, initialIsVisible } = (() => {
@@ -163,6 +166,7 @@ const MediaControls = (props: Props) => {
               mainColor={mainColor}
               playerState={playerState}
               renderPlayIcon={renderPlayIcon}
+              playIconContainerStyle={playIconContainerStyle}
             />
             <Slider
               progress={progress}
