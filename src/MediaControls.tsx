@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import {
   View,
   Animated,
@@ -30,6 +30,8 @@ export type Props = {
   showOnStart?: boolean;
   sliderStyle?: CustomSliderStyle;
   toolbarStyle?: ViewStyle;
+  renderPlayIcon?: () => ReactNode;
+  renderFullScreenIcon?: () => ReactNode;
 };
 
 const MediaControls = (props: Props) => {
@@ -49,6 +51,8 @@ const MediaControls = (props: Props) => {
     showOnStart = true,
     sliderStyle, // defaults are applied in Slider.tsx
     toolbarStyle: customToolbarStyle = {},
+    renderPlayIcon,
+    renderFullScreenIcon,
   } = props;
   const { initialOpacity, initialIsVisible } = (() => {
     if (showOnStart) {
@@ -158,6 +162,7 @@ const MediaControls = (props: Props) => {
               isLoading={isLoading}
               mainColor={mainColor}
               playerState={playerState}
+              renderPlayIcon={renderPlayIcon}
             />
             <Slider
               progress={progress}
@@ -169,6 +174,7 @@ const MediaControls = (props: Props) => {
               onSeeking={onSeeking}
               onPause={onPause}
               customSliderStyle={sliderStyle}
+              renderFullScreenIcon={renderFullScreenIcon}
             />
           </View>
         )}
