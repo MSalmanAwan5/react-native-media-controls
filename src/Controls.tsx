@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { TouchableOpacity, View, ActivityIndicator, Image } from "react-native";
 import styles from "./MediaControls.style";
 import { getPlayerStateIcon } from "./utils";
@@ -10,10 +10,18 @@ type ControlsProps = Pick<
   "isLoading" | "mainColor" | "playerState" | "onReplay"
 > & {
   onPause: () => void;
+  renderPlayIcon?: () => ReactNode;
 };
 
 const Controls = (props: ControlsProps) => {
-  const { isLoading, mainColor, playerState, onReplay, onPause } = props;
+  const {
+    isLoading,
+    mainColor,
+    playerState,
+    onReplay,
+    onPause,
+    renderPlayIcon,
+  } = props;
   const icon = getPlayerStateIcon(playerState);
   const pressAction = playerState === PLAYER_STATES.ENDED ? onReplay : onPause;
 
@@ -26,7 +34,11 @@ const Controls = (props: ControlsProps) => {
       accessibilityLabel={PLAYER_STATES.PAUSED ? "Tap to Play" : "Tap to Pause"}
       accessibilityHint={"Plays and Pauses the Video"}
     >
-      <Image source={icon} style={styles.playIcon} />
+      {renderPlayIcon ? (
+        renderPlayIcon()
+      ) : (
+        <Image source={icon} style={styles.playIcon} />
+      )}
     </TouchableOpacity>
   );
 
