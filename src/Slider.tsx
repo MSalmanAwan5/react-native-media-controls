@@ -5,7 +5,6 @@ import styles from "./MediaControls.style";
 import { humanizeVideoDuration } from "./utils";
 import { Props as MediaControlsProps } from "./MediaControls";
 import { PLAYER_STATES } from "./constants/playerStates";
-import RNCSlider from "@react-native-community/slider";
 
 export type CustomSliderStyle = {
   containerStyle: ViewStyle;
@@ -74,15 +73,7 @@ const Slider = (props: Props) => {
             {humanizeVideoDuration(duration)}
           </Text>
         </View>
-        {/* <RNCSlider
-          style={[styles.progressSlider]}
-          minimumValue={0}
-          maximumValue={Math.floor(duration)}
-          value={Math.floor(progress)}
-          minimumTrackTintColor={mainColor}
-          onSlidingComplete={seekVideo}
-          onValueChange={dragging}
-        /> */}
+
         <RNSlider
           style={[styles.progressSlider]}
           onValueChange={dragging}
