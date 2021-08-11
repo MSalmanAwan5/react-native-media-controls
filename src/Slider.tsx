@@ -74,7 +74,7 @@ const Slider = (props: Props) => {
             {humanizeVideoDuration(duration)}
           </Text>
         </View>
-        <RNCSlider
+        {/* <RNCSlider
           style={[styles.progressSlider]}
           minimumValue={0}
           maximumValue={Math.floor(duration)}
@@ -82,7 +82,7 @@ const Slider = (props: Props) => {
           minimumTrackTintColor={mainColor}
           onSlidingComplete={seekVideo}
           onValueChange={dragging}
-        />
+        /> */}
         <RNSlider
           style={[styles.progressSlider]}
           onValueChange={dragging}
